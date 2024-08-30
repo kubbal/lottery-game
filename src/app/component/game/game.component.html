@@ -1,0 +1,7 @@
+<div>
+    <h2>Game Page</h2>
+    <div *ngFor="let panel of panels">
+        <app-game-panel [panelIndex]="panel"></app-game-panel>
+    </div>
+    <button (click)="play()">Play</button>
+</div>
