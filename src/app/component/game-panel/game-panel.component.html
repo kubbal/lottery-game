@@ -1,0 +1,10 @@
+<div>
+    <div>{{ panelIndex }}</div>
+    <div class="numbers-grid">
+      <div *ngFor="let number of numbers" (click)="toggleNumber(number)" [class.selected]="selectedNumbers.includes(number)">
+        {{ number }}
+      </div>
+    </div>
+    <button (click)="generateRandomNumbers()">Random Generator</button>
+    <button (click)="clearSelection()">Delete</button>
+  </div>

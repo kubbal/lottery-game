@@ -1,0 +1,17 @@
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.numbers-grid div {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.numbers-grid div.selected {
+  background-color: #007bff;
+  color: #fff;
+}
