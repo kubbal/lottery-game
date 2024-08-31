@@ -20,7 +20,11 @@ export class GamePanelComponent {
   randomNumberService = inject(RandomNumberService);
 
   toggleNumber(number: number) {
-    if (this.selectedNumbers.length < 6) {
+    const index = this.selectedNumbers.indexOf(number);
+    if (index > -1) {
+      this.selectedNumbers.splice(index, 1);
+      this.numberToggle.emit({ panelId: this.panel.id, number: number+1 });
+    } else {
       this.selectedNumbers.push(number);
       this.numberToggle.emit({ panelId: this.panel.id, number: number+1 });
     }
