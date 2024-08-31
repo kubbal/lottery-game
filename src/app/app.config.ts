@@ -5,12 +5,13 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { userReducer } from './store/reducer/user.reducer';
+import { UserEffects } from './store/effect/user.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore({user: userReducer}),
-    provideEffects()
+    provideEffects([UserEffects])
   ]
 };

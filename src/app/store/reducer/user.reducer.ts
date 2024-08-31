@@ -1,12 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { loadUsersSuccess, loginUserSuccess, loginUserFailure } from '../action/user.action';
-import { UserInterface } from '../../model/user.interface';
-
-export interface UserState {
-  users: UserInterface[];
-  loggedInUser: UserInterface | null;
-  error: string | null;
-}
+import { UserState } from '../../model/user-state.interface';
 
 const initialState: UserState = {
   users: [],
