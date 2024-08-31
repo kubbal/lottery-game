@@ -1,17 +1,51 @@
-.numbers-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+.game-panel {
+  display: inline-block;
+  text-align: center;
 }
 
-.numbers-grid div {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
+.controls {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.control-btn {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.control-btn i {
+  margin-right: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 30px);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.numbers-grid div.selected {
-  background-color: #007bff;
-  color: #fff;
+.cell.active {
+  background-color: red;
+  color: white;
 }

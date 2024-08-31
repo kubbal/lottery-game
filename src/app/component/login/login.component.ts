@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserInterface } from '../../model/user.interface';
 import { Store } from '@ngrx/store';
@@ -14,15 +14,19 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   users$: Observable<UserInterface[]>;
   error$: Observable<string | null>;
   selectedUserId: string = '';
   password: string = '';
+  store = inject(Store);
 
-  constructor(private store: Store) {
+  constructor() {
     this.users$ = this.store.select(selectUsers);
     this.error$ = this.store.select(selectLoginError);
+  }
+
+  ngOnInit(): void {
     this.store.dispatch(loadUsers());
   }
 
