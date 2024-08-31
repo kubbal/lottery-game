@@ -2,8 +2,13 @@
     <h2>Game Page</h2>
     <div>
         @for (panel of panels; track panel) {
-            <app-game-panel [panelIndex]="panel"></app-game-panel>
+            <app-game-panel [panel]="panel"
+                            (numberToggle)="onNumberToggle($event)"
+                            (clearPanelEmitter)="onClearPanel($event)"></app-game-panel>
         }
     </div>
     <button (click)="play()">Play</button>
+    <div *ngFor="let result of results">
+        <p>{{ result }}</p>
+    </div>
 </div>

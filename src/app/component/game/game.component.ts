@@ -1,30 +1,54 @@
 import { Component } from '@angular/core';
-import { GamePanelComponent } from '../game-panel/game-panel.component';
 import { CommonModule } from '@angular/common';
+import { PanelInterface } from '../../model/panel.interface';
+import { GamePanelComponent } from '../game-panel/game-panel.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [GamePanelComponent, CommonModule],
+  imports: [CommonModule, GamePanelComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
 export class GameComponent {
-  panels = [0, 1, 2, 3];
+  panels: PanelInterface[] = [
+    { id: 0, selectedNumbers: new Set<number>() },
+    { id: 1, selectedNumbers: new Set<number>() },
+    { id: 2, selectedNumbers: new Set<number>() },
+    { id: 3, selectedNumbers: new Set<number>() }
+  ];
+
+  results: string[] = [];
 
   play() {
-    this.panels.forEach((_, index) => {
-      const panelComponent = <GamePanelComponent>(document.querySelector(`app-game-panel[panelIndex="${index}"]`) as unknown);
-      const selectedNumbers = panelComponent.selectedNumbers;
-      if (selectedNumbers.length === 6) {
-        console.log(`Panel ${index + 1}: [${selectedNumbers.join(', ')}]`);
-      } else if (selectedNumbers.length === 0) {
-        console.log(`Panel ${index + 1}: empty`);
-      } else if (selectedNumbers.length < 6) {
-        console.log(`Panel ${index + 1}: Error: ${6 - selectedNumbers.length} marks are missing`);
+    this.results = this.panels.map(panel => {
+      const count = panel.selectedNumbers.size;
+      const needed = 6;
+      const displayId = panel.id + 1;
+      if (count === needed) {
+        return `Panel ${displayId}: [${Array.from(panel.selectedNumbers).sort().join(', ')}]`;
+      } else if (count === 0) {
+        return `Panel ${displayId}: empty`;
+      } else if (count < needed) {
+        return `Panel ${displayId}: Error: ${needed - count} marks are missing`;
       } else {
-        console.log(`Panel ${index + 1}: Error: Please remove ${selectedNumbers.length - 6} mark(s)`);
+        return `Panel ${displayId}: Error: Please remove ${count - needed} mark(s)`;
       }
     });
+  }
+
+  onNumberToggle(event: { panelId: number, number: number }): void {
+    const panel = this.panels.find(p => p.id === event.panelId);
+    if (panel) {
+      if (panel.selectedNumbers.has(event.number)) {
+        panel.selectedNumbers.delete(event.number);
+      } else {
+        panel.selectedNumbers.add(event.number);
+      }
+    }
+  }
+
+  onClearPanel(event: { panelId: number; }) {
+    this.panels[event.panelId].selectedNumbers.clear();
   }
 }

@@ -1,11 +1,11 @@
 <div class="game-panel">
-  <div class="background-number">{{ panelIndex + 1 }}</div>
+  <div class="background-number">{{ panel.id + 1 }}</div>
   <div class="controls">
     <button (click)="generateRandomNumbers()" class="control-btn">
-      <i class="fas fa-random"></i>🔀 RND
+      🔀 RND
     </button>
     <button (click)="clearSelection()" class="control-btn">
-      <i class="fas fa-trash"></i>🗑️ Del
+      🗑️ Del
     </button>
   </div>
   <div class="grid">
