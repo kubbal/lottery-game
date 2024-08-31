@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { loadUsers, loadUsersSuccess, loginUser, loginUserSuccess, loginUserFailure } from '../action/user.action';
 import { users } from '../../data/users';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions) {}
+  actions$ = inject(Actions);
+  router = inject(Router);
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
@@ -28,5 +30,12 @@ export class UserEffects {
         return of(loginUserFailure({ error: 'Invalid credentials' }));
       })
     )
+  );
+
+  loginUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginUserSuccess),
+      tap(() => this.router.navigate(['/game']))
+    ), { dispatch: false }
   );
 }

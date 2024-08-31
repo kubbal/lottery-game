@@ -3,7 +3,6 @@
     <select (change)="onUserSelect($event)">
         <option *ngFor="let user of users$ | async" [value]="user.userId">{{ user.userName }}</option>
     </select>
-    <input [(ngModel)]="selectedUserId" placeholder="User ID" />
     <input [(ngModel)]="password" type="password" placeholder="Password" />
     <button (click)="login()">Log In</button>
     <div *ngIf="error$ | async as error" class="error">{{ error }}</div>
