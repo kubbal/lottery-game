@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { selectLoginError, selectUsers } from '../../store/selector/user.selector';
 import { loadUsers, loginUser } from '../../store/action/user.action';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
