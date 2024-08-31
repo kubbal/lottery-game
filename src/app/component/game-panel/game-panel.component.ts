@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { RandomNumberService } from '../../service/random-number.service';
 
 @Component({
   selector: 'app-game-panel',
@@ -12,6 +13,7 @@ export class GamePanelComponent {
   @Input() panelIndex: number = 0;
   numbers: number[] = Array(49).fill(0).map((_, i) => i + 1);
   selectedNumbers: number[] = [];
+  randomNumberService = inject(RandomNumberService);
 
   toggleNumber(number: number) {
     const index = this.selectedNumbers.indexOf(number);
@@ -22,17 +24,13 @@ export class GamePanelComponent {
     }
   }
 
-  generateRandomNumbers() {
-    this.selectedNumbers = [];
-    while (this.selectedNumbers.length < 6) {
-      const randomNum = Math.floor(Math.random() * 49) + 1;
-      if (!this.selectedNumbers.includes(randomNum)) {
-        this.selectedNumbers.push(randomNum);
-      }
-    }
-  }
-
   clearSelection() {
     this.selectedNumbers = [];
+  }
+
+  generateRandomNumbers() {
+    this.clearSelection();
+    const randomNumbers = this.randomNumberService.generateRandomNumbers(6);
+    randomNumbers.forEach(num => this.selectedNumbers.push(num));
   }
 }
