@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class RandomNumberService {
 
-  constructor() { }
-
   generateRandomNumbers(count: number, max: number = 49): number[] {
     if (count > max)
       throw Error(`Count (${count}) cannot be greater than max (${max})`);
