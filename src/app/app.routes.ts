@@ -5,4 +5,5 @@ import { GameComponent } from './component/game/game.component';
 export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'game', component: GameComponent },
+    { path: '**', redirectTo: '' }
 ];
