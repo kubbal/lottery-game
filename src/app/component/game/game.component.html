@@ -8,7 +8,9 @@
         }
     </div>
     <button (click)="play()">Play</button>
-    <div *ngFor="let result of results">
-        <p>{{ result }}</p>
+    <div>
+        @for (result of results; track result) {
+            <p>{{ result }}</p>
+        }
     </div>
 </div>
