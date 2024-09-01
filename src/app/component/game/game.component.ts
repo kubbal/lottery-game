@@ -26,7 +26,7 @@ export class GameComponent {
       const needed = 6;
       const displayId = panel.id + 1;
       if (count === needed) {
-        return `Panel ${displayId}: [${Array.from(panel.selectedNumbers).sort().join(', ')}]`;
+        return `Panel ${displayId}: ${Array.from(panel.selectedNumbers).sort((a,b) => a - b).join(', ')}`;
       } else if (count === 0) {
         return `Panel ${displayId}: empty`;
       } else if (count < needed) {
